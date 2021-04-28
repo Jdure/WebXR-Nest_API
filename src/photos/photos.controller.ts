@@ -1,30 +1,48 @@
-import { Controller, Get, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import {
+  Controller,
+  Get,
+  Header,
+  Param,
+  Post,
+  Query,
+  Res,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { PhotosService } from './photos.service'
 
 @Controller('photos')
 export class PhotosController {
-    @Get()
-    getPhotos(): string {
-        return 'My photos'
-    }
 
-    @Post('upload')
-    @UseInterceptors(FileInterceptor('file'))
-    @ApiConsumes('multipart/form-data')
-    @ApiBody({
-      schema: {
-        type: 'object',
-        properties: {
-          file: {
-            type: 'string',
-            format: 'binary',
-          },
-        },
-      },
-    })
-    uploadFile(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
+  constructor(private readonly photoservice: PhotosService) {}
+
+  @Get(':name')
+  @Header('Content-Type', 'image/png')
+  async getImage(@Res() res, @Param() params): Promise<string>{
+    const file =  await this.photoservice.getImageFile(params.name);
+    return file.pipe(res);
   }
 
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
+  async uploadFile(@UploadedFile() photo: Express.Multer.File) {
+    await this.photoservice.upload(photo);
+    return "Photo has been uploaded";
+  }
 }
