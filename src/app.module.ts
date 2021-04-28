@@ -2,15 +2,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ScansController } from './features/scans/scans.controller';
-import { ScanService } from './features/scans/scans.service';
-import { MulterModule } from '@nestjs/platform-express';
+import { PhotosModule } from './photos/photos.module';
 
 @Module({
-  controllers: [AppController, ScansController],
-  providers: [AppService, ScanService],
-  imports: [MulterModule.register({
-    dest: './files',
-  })],
+  controllers: [AppController],
+  providers: [AppService],
+  imports: [PhotosModule],
 })
 export class AppModule {}
