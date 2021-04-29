@@ -11,7 +11,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('XR API')
-    .setDescription('The API description')
+    .setDescription('The WEBXR API for Azure')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
