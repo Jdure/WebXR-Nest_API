@@ -1,4 +1,4 @@
-# WEBXR API
+# WEBXR NEST API
 
 A REST API for the R&P WebXR application
 
