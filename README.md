@@ -17,7 +17,7 @@ A REST API for the R&P WebXR application
 1. Create an Azure storage account
     - Navigate to Settings, select Access keys
     - Find the Connection String value under key1
-    - Copy the value it'll be added to your environment variable
+    - Copy the value it will be added to your environment variable
 
 2. Clone this repo
     
