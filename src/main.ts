@@ -11,11 +11,11 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('XR API')
-    .setDescription('The WEBXR API for Azure')
+    .setDescription('The WEBXR API Documentation')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('docs', app, document);
 
   await app.listen(3000);
 }

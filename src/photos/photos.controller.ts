@@ -5,7 +5,6 @@ import {
   Header,
   Param,
   Post,
-  Query,
   Res,
   UploadedFile,
   UseInterceptors,
@@ -18,6 +17,11 @@ import { PhotosService } from './photos.service'
 export class PhotosController {
 
   constructor(private readonly photoservice: PhotosService) {}
+
+  @Get()
+  takePhoto(): string {
+    return 'This is the photo route'
+  }
 
   @Get(':name')
   @Header('Content-Type', 'image/png')
