@@ -11,12 +11,12 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('XR API')
-    .setDescription('The API description')
+    .setDescription('The WEBXR API Documentation')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('docs', app, document);
 
-  await app.listen(3000);
+  await app.listen(8080);
 }
 bootstrap();
