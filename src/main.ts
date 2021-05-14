@@ -4,10 +4,15 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { readFileSync } from 'fs';
 
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const httpsOptions = {
+    key: readFileSync('./certs/privateKey.pem'),
+    cert: readFileSync('./certs/certificate.pem')
+  }
+  const app = await NestFactory.create(AppModule, {httpsOptions});
 
   const config = new DocumentBuilder()
     .setTitle('XR API')
