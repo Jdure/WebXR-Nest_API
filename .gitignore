@@ -395,6 +395,7 @@ Temporary Items
 =======
 # Local
 .env
+*.pem
 dist
 test.rest
 smiley.png
