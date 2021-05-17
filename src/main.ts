@@ -12,8 +12,12 @@ async function bootstrap() {
     key: readFileSync('./certs/privateKey.pem'),
     cert: readFileSync('./certs/certificate.pem')
   }
+  let corsOptions = {
+    origin: '*',
+    allowHeaders: ['Content-Type', 'Authorization']
+  }
   const app = await NestFactory.create(AppModule, {httpsOptions});
-
+  app.enableCors(corsOptions);
   const config = new DocumentBuilder()
     .setTitle('XR API')
     .setDescription('The WEBXR API Documentation')
